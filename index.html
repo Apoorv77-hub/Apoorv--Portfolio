@@ -958,9 +958,48 @@ Let’s create something amazing together! 💡✨</p>
                       <input type="submit" class="button btn-send" value="Send message">
                     </div>
                   </form>
+                  <div id="response-message" style="margin-top: 15px;"></div>
+                    
                 </div>
               </div>
             </section>
+
+            <script>
+            document.getElementById("form").addEventListener("submit",function (e) {
+                e.preventDefault();
+                const form = this
+                const button = form.querySelector(".btn-send);
+                const responseMsg = document.getElementsById("response-message");
+
+                button.disabled = true;
+                button.value = "Sending...";
+
+                const formData = new FormData(form);
+
+                fetch(form.action, {
+                    method: "POST",
+                    body: formData
+                })
+
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success){
+                        responseMsg.innerHTML = "<div style='color: green;'> Message sent sucessfully!</div>";
+                        form.reset();
+                    }
+                        else{
+                            responseMsg.innerHTML = "<div style='color: red;'> Something went wrong. Please try again.</div>
+                        }
+                    button.disabled = false;
+                    button.value = "Send Message";
+                })
+                .catch(error => {
+                  responseMsg.innerHTML = "<div style='color: red;'> Error sending message. Please check your connection.</div>";
+                  button.disabled = false;
+                  button.value = "Send Message";
+                });
+            });
+            </script>
             <!-- End Contact Subpage -->
 
           </div>
