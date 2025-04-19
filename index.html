@@ -922,7 +922,7 @@ Let’s create something amazing together! 💡✨</p>
                   <div class="block-title">
                     <h3>Contact Form</h3>
                   </div>
-                  <form method="POST" action="https://api.web3forms.com/submit"  target="_blank" id="form" novalidate>
+                  <form method="POST" action="https://api.web3forms.com/submit" id="form" novalidate>
                     <input type="hidden" name="access_key" value="9578cfaa-6bf3-4a97-bd91-488c9844956d">
                       
                     <div class="messages"></div>
@@ -986,6 +986,9 @@ Let’s create something amazing together! 💡✨</p>
                     if (data.success){
                         responseMsg.innerHTML = "<div style='color: green;'> Message sent sucessfully!</div>";
                         form.reset();
+                        setTimeout(() => {
+                          location.reload();
+                        }, 2000);
                     }
                         else{
                             responseMsg.innerHTML = "<div style='color: red;'> Something went wrong. Please try again.</div>
