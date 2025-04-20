@@ -961,16 +961,37 @@ Let’s create something amazing together! 💡✨</p>
                   <div id="successModal" style="
                       display: none;
                       position: fixed;
-                      top: 40%;
+                      top: 50%;
                       left: 50%;
                       transform: translate(-50%, -50%);
-                      background: #fff;
-                      padding: 25px 30px;
-                      border-radius: 10px;
-                      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+                      background: #ffffff;
+                      padding: 40px;
+                      border-radius: 15px;
+                      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
                       z-index: 9999;
-                      text-align: center;">
-                      <p style="font-size: 18px; color: #333;">✅ Your message has been sent!</p>
+                      text-align: center;
+                      opacity: 0;
+                      pointer-events: none;
+                      transition: opacity 0.5s ease, transform 0.5s ease;
+                      max-width: 500px;
+                      width: 90%;">
+                      <div style="font-size: 36px; color: #4CAF50; margin-bottom: 15px;">
+                          <i class="fa fa-check-circle"></i>
+                      </div>
+                      <p style="font-size: 20px; color: #333; font-weight: bold;">✅ Your message has been sent successfully!</p>
+                      <button id="closeModal" style="
+                          margin-top: 25px;
+                          padding: 12px 30px;
+                          background-color: #4CAF50;
+                          color: white;
+                          border: none;
+                          border-radius: 8px;
+                          cursor: pointer;
+                          font-size: 18px;
+                          transition: background-color 0.3s ease;
+                        ">
+                          Close
+                      </button>
                   </div>
                   <div id="response-message" style="margin-top: 15px;"></div>
                     
