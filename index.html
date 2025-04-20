@@ -965,14 +965,30 @@ Let’s create something amazing together! 💡✨</p>
             </section>
 
             <script>
-            document.getElementById("form").addEventListener("submit",function (e) {
-                e.preventDefault();
-                const form = this
-                const button = form.querySelector(".btn-send);
-                const responseMsg = document.getElementsById("response-message");
+                document.addEventListener("DOMcontentLoaded", function () {
+                    const form = document.getElementById("form");
 
-                button.disabled = true;
-                button.value = "Sending...";
+                    let responseMsg = document.getElementById("response-message");
+                    if (!responseMsg) {
+                        responseMsg = document.createElement("div");
+                        responseMsg.id = "response-message";
+                        responseMsg.style.marginBottom = "15px";
+                        form.prepend(responseMsg);
+                    }
+
+                    form.addEventListener("submit", function (e) {
+                        e.preventDefault();
+
+                        const button = form.querySelection(".btn-send");
+                        button.diabled = true;
+                        button.value = "Sending...";
+
+                        const formData = new FormData(form);
+
+                        fetch("https://api.web3forms.com/submit", {
+                            method: "POST"
+                            body: formData
+                    })
 
                 const formData = new FormData(form);
 
@@ -981,25 +997,46 @@ Let’s create something amazing together! 💡✨</p>
                     body: formData
                 })
 
-                .then(response => response.json())
+                .then(res => res.json())
                 .then(data => {
                     if (data.success){
-                        responseMsg.innerHTML = "<div style='color: green;'> Message sent sucessfully!</div>";
+                        responseMsg.innerHTML = "<div style='color: green; font-weight: 600;'> Message sent sucessfully!</div>";
                         form.reset();
-                        setTimeout(() => { window.location.href= "https://apoorv77-hub.github.io/Apoorv-Portfolio-Website/#contact"; window.location.reload(); }, 3000);     
-                    }
+                        setTimeout(() => { 
+                            if (typeof PageTransitions !== "undefined" && PageTranstions.nextPage) {
+                                const contactBtn = document.querySelector('[data-menuanchor="contact"]')
+                                if (contactBtn) {
+                                  contactBtn.click();
+                                }
+                    
                         else{
-                            responseMsg.innerHTML = "<div style='color: red;'> Something went wrong. Please try again.</div>
-                        }
-                    button.disabled = false;
-                    button.value = "Send Message";
+                            const contactSection = document.querySelector(' [data-id="contact"]');
+                            if (contactSection) {
+                                contactSection.scrollIntoView({ behavior: "smooth" });
+                           }
+                         }
+                      }
+                      button.disabled = false;
+                      button.value = "Send message";
+                      setTimeout(() => {
+                          responseMsg.innerHTML = "";
+                      },3000)
+                        },2000);
+                    } else {
+                        responseMsg.innerHTML = 
+                            "<div style='color: red;'> Submission failed. Please try again.</div>";
+                        button.disabled = false;
+                        button.value = "Send message";
+                    }
                 })
-                .catch(error => {
-                  responseMsg.innerHTML = "<div style='color: red;'> Error sending message. Please check your connection.</div>";
-                  button.disabled = false;
-                  button.value = "Send Message";
+                .catch(() => {
+                    responseMsg.innerHTML = 
+                      "div style='color: red;'> Network error. Please try again.</div>";
+                    button.disabled = false;
+                    button.value = "Send message";
                 });
-            });
+                });
+                });
             </script>
             <!-- End Contact Subpage -->
 
