@@ -990,43 +990,36 @@ Let’s create something amazing together! 💡✨</p>
                             body: formData
                     })
 
-                const formData = new FormData(form);
-
-                fetch(form.action, {
+                    const formData = new FormData(form);
+                    fetch(form.action, {
                     method: "POST",
                     body: formData
-                })
+                    })
 
-                .then(res => res.json())
-                .then(data => {
+                   .then(res => res.json())
+                   .then(data => {
                     if (data.success){
                         responseMsg.innerHTML = "<div style='color: green; font-weight: 600;'> Message sent sucessfully!</div>";
                         form.reset();
-                          setTimeout(() => {
-              // Simulate return to contact section
-                              const contactSection = document.querySelector('[data-id="contact"]');
-                              if (contactSection) {
-                                  contactSection.scrollIntoView({ behavior: "smooth" });
-                              }
-                              setTimeout(() => {
-                                  responseMsg.innerHTML = "";
-                              }, 4000);
-                              button.disabled = false;
-                              button.value = "Send message";
-                          }, 2000);
-                    } else {
+                        $('#confirmationModal').modal('show');
+                        button.disabled = false;
+                        button.value = "Send message";
+                     else {
                         responseMsg.innerHTML = 
                             "<div style='color: red;'> Submission failed. Please try again.</div>";
                         button.disabled = false;
                         button.value = "Send message";
+                        setTimeout(() => {
+                            $('#confirmationModal').modal('hide');
+                        }, 3000);
                     }
-                })
-                .catch(() => {
+                   })
+                    .catch(() => {
                     responseMsg.innerHTML = 
                       "div style='color: red;'> Network error. Please try again.</div>";
                     button.disabled = false;
                     button.value = "Send message";
-                });
+                    });
                 });
                 });
             </script>
