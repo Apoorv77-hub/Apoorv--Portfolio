@@ -965,47 +965,30 @@ Let’s create something amazing together! 💡✨</p>
             </section>
 
             <script>
-              document.addEventListener("DOMContentLoaded", function () {
-                  const form = document.getElementById("form");
-                  form.addEventListener("submit", function (e) {
-                      e.preventDefualt();
+              document.getElementById("form").addEventListener("submit", function(e) {
+                  e.preventDefault();
+                  const form = e.target;
+                  const formData = new FormData(form);
 
-                      const button = form.querySelector(".btn-send");
-                      button.disabled = true;
-                      button.value = "Sending...";
+                  fetch("https://api.web3forms.com/submit", {
+                      method: "POST",
+                      body: formData
+                  })
+                  .then(res => res.json())
+                  .then(data => {
+                      if (data.success) {
+                          document.getElementById("success-message".style.display = "block";
+                          form.reset();
 
-                      const formData = new FormData(form);
-
-                      fetch("https://api.web3forms.com/submit", {
-                          method: "POST",
-                          body: formData
-                      })
-                         .then((res) => res.join())
-                         .then((data) => {
-                             if (data.success) {
-                                 form.reset();
-                                 const messageDiv = document.createElement("div");
-                                 messageDiv.style.color = "green";
-                                 messageDiv.style.fontWeight = "600";
-                                 messageDiv.style.marginBottom = "15px";
-                                 messageDiv.innerText = "✅ Message sent successfully!";
-                                 form.prepend(messageDiv);
-
-                                 setTimeout(() => {
-                                     window.location.href = "https://apoorv77-hub.github.io/Apoorv-Portfolio-Website/#contact";
-                                     setTimeout(() => location.reload(), 300);
-                                 }, 2000);
-                             } else {
-                                 alert("❌ Submission failed. Please try again.");
-                                 button.disabled = false;
-                                 button.value = "Send message";
-                             }
-                         })
-                      .catch(() => {
-                          alert("❌ Network error. Please try again.");
-                          button.disabled = false;
-                          button.value = "Send message";
-                      });
+                          setTimeout(() => {
+                              window.location.href = "https://apoorv77-hub.github.io/Apoorv-Portfolio-Website/#contact";
+                          }, 2000);
+                      }else{
+                          alert("Submission failed.");
+                      }
+                  })
+                  .catch(() => {
+                      alert("Something went wrong.");
                   });
               });
             </script>
