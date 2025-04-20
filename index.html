@@ -981,50 +981,35 @@ Let’s create something amazing together! 💡✨</p>
                       fetch("https://api.web3forms.com/submit", {
                           method: "POST",
                           body: formData
-                        })
+                      })
                          .then((res) => res.join())
                          .then((data) => {
                              if (data.success) {
                                  form.reset();
+                                 const messageDiv = document.createElement("div");
+                                 messageDiv.style.color = "green";
+                                 messageDiv.style.fontWeight = "600";
+                                 messageDiv.style.marginBottom = "15px";
+                                 messageDiv.innerText = "✅ Message sent successfully!";
+                                 form.prepend(messageDiv);
 
-                                 window.location.hash = "contact";
-                                 location.reload();
+                                 setTimeout(() => {
+                                     window.location.href = "https://apoorv77-hub.github.io/Apoorv-Portfolio-Website/#contact";
+                                     setTimeout(() => location.reload(), 300);
+                                 }, 2000);
                              } else {
-                                 alert("Submission failed. Please try again.");
-                                 button.diabled = false;
-                                 button.value = "Send Message";
+                                 alert("❌ Submission failed. Please try again.");
+                                 button.disabled = false;
+                                 button.value = "Send message";
                              }
                          })
-                         .catch(() => {
-                             alert("Network error. Please try again.");
-                             button.disabled = false;
-                             button.value = "Send message";
-                         });
+                      .catch(() => {
+                          alert("❌ Network error. Please try again.");
+                          button.disabled = false;
+                          button.value = "Send message";
+                      });
                   });
-
-                  if(localStorage.getItem("formSubmitted") === "true") {
-                      localStorage.removeItem("formSubmitted");
-
-                      const contactSection = document.querySelector('[data-id="contact"]');
-                      if (contactSection) {
-                          setTime(() => {
-                              contactSection.scrollIntoView({ behavior: "smooth"})
-
-                              const messageDiv = document.createElement("div");
-                              messageDiv.style.color = "green";
-                              messageDiv.style.fontWeight = "600";
-                              messageDiv.style.marginBottom = "15px";
-                              messageDiv.innerText = "Message sent successfully!";
-                              form.prepend(messageDiv);
-
-                              setTimeout(() => {
-                                  messageDiv.remove();
-                              }, 4000);
-                          }, 600);
-                      }
-                  }
-              })
-              
+              });
             </script>
             <!-- End Contact Subpage -->
 
