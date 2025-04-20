@@ -958,6 +958,20 @@ Let’s create something amazing together! 💡✨</p>
                       <input type="submit" class="button btn-send" value="Send message">
                     </div>
                   </form>
+                  <div id="successModal" style="
+                      display: none;
+                      position: fixed;
+                      top: 40%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                      background: #fff;
+                      padding: 25px 30px;
+                      border-radius: 10px;
+                      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+                      z-index: 9999;
+                      text-align: center;">
+                      <p style="font-size: 18px; color: #333;">✅ Your message has been sent!</p>
+                  </div>
                   <div id="response-message" style="margin-top: 15px;"></div>
                     
                 </div>
@@ -965,32 +979,34 @@ Let’s create something amazing together! 💡✨</p>
             </section>
 
             <script>
-              document.getElementById("form").addEventListener("submit", function(e) {
-                  e.preventDefault();
-                  const form = e.target;
-                  const formData = new FormData(form);
-
-                  fetch("https://api.web3forms.com/submit", {
-                      method: "POST",
-                      body: formData
-                  })
-                  .then(res => res.json())
-                  .then(data => {
-                      if (data.success) {
-                          document.getElementById("success-message".style.display = "block";
-                          form.reset();
-
-                          setTimeout(() => {
-                              window.location.href = "https://apoorv77-hub.github.io/Apoorv-Portfolio-Website/#contact";
-                          }, 2000);
-                      }else{
-                          alert("Submission failed.");
-                      }
-                  })
-                  .catch(() => {
-                      alert("Something went wrong.");
-                  });
-              });
+                document.getElementById("form").addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    const form = e.target;
+                    const formData = new FormData(form);
+                    const modal = document.getElementById("successModal");
+                    fetch("https://api.web3forms.com/submit", {
+                        method: "POST",
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            form.reset();
+                            modal.style.display = "block";
+                            
+                            setTimeout(() => {
+                                modal.style.display = "none";
+                                window.location.hash = "https://apoorv77-hub.github.io/Apoorv-Portfolio-Website/#contact";
+                                document.querySelector('[data-id="contact"]').scrollIntoView({ behavior: "smooth" });
+                            }, 2000);
+                        } else {
+                            alert("❌ Submission failed.");
+                        }
+                    })
+                    .catch(() => {
+                        alert("❌ Something went wrong.");
+                    });
+                });
             </script>
             <!-- End Contact Subpage -->
 
