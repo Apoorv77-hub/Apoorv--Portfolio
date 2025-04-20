@@ -1002,26 +1002,18 @@ Let’s create something amazing together! 💡✨</p>
                     if (data.success){
                         responseMsg.innerHTML = "<div style='color: green; font-weight: 600;'> Message sent sucessfully!</div>";
                         form.reset();
-                        setTimeout(() => { 
-                            if (typeof PageTransitions !== "undefined" && PageTranstions.nextPage) {
-                                const contactBtn = document.querySelector('[data-menuanchor="contact"]')
-                                if (contactBtn) {
-                                  contactBtn.click();
-                                }
-                    
-                        else{
-                            const contactSection = document.querySelector(' [data-id="contact"]');
-                            if (contactSection) {
-                                contactSection.scrollIntoView({ behavior: "smooth" });
-                           }
-                         }
-                      }
-                      button.disabled = false;
-                      button.value = "Send message";
-                      setTimeout(() => {
-                          responseMsg.innerHTML = "";
-                      },3000)
-                        },2000);
+                          setTimeout(() => {
+              // Simulate return to contact section
+                              const contactSection = document.querySelector('[data-id="contact"]');
+                              if (contactSection) {
+                                  contactSection.scrollIntoView({ behavior: "smooth" });
+                              }
+                              setTimeout(() => {
+                                  responseMsg.innerHTML = "";
+                              }, 4000);
+                              button.disabled = false;
+                              button.value = "Send message";
+                          }, 2000);
                     } else {
                         responseMsg.innerHTML = 
                             "<div style='color: red;'> Submission failed. Please try again.</div>";
