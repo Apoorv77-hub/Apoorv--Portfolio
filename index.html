@@ -976,23 +976,9 @@ Let’s create something amazing together! 💡✨</p>
                       max-width: 500px;
                       width: 90%;
                     ">
-                      <div style="font-size: 36px; color: #4CAF50; margin-bottom: 15px;">
-                          <i class="fa fa-check-circle"></i>
-                      </div>
-                      <p style="font-size: 20px; color: #333; font-weight: bold;"> ✅ Your message has been sent successfully!</p>
-                      <button id="closeModal" style="
-                          margin-top: 25px;
-                          padding: 12px 25px;
-                          background-color: #4CAF50;
-                          color: white;
-                          border: none;
-                          border-radius: 8px;
-                          cursor: pointer;
-                          font-size: 18px;
-                          transition: background-color 0.3s ease;
-                          ">
-                          Close
-                      </button>
+                      <p style="font-size: 20px; color: #333; font-weight: bold;"> 
+                          ✅ Your message has been sent successfully!
+                      </p>
                   </div>
                   <div id="response-message" style="margin-top: 15px;"></div>
                     
@@ -1006,8 +992,7 @@ Let’s create something amazing together! 💡✨</p>
                     const form = e.target;
                     const formData = new FormData(form);
                     const modal = document.getElementById("successModal");
-                    modal.style.opacity = "0";
-                    modal.style.pointerEvents = "none";
+                    
                     fetch("https://api.web3forms.com/submit", {
                         method: "POST",
                         body: formData
