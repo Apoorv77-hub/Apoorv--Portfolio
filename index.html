@@ -1005,8 +1005,10 @@ Let’s create something amazing together! 💡✨</p>
             </section>
 
             <script>
-                document.getElementById("closeModal").addEventListener("click", function () {
-                    
+                document.getElementById("form").addEventListener("submit", function (e) {
+                    e.preventDefault();
+                    const form = e.target;
+                    const formData = new FormData(form);
                     const modal = document.getElementById("successModal");
                     modal.style.opacity = "0";
                     modal.style.pointerEvents = "none";
