@@ -1039,8 +1039,8 @@ Let’s create something amazing together! 💡✨</p>
     <script src="preview/lmpixels-demo-panel.js"></script>
     <script>
       function animateCounters() {
-          document.querySelectorAll('.fun-value').forEach(el => {
-              let final = parseFloat(el.textContent.replace('+', ''));
+          document.querySelectorAll('.fun-value b').forEach(el => {
+              let final = parseFloat(el.textContent);
               if (isNaN(final)) return;
               
               let current = 0;
