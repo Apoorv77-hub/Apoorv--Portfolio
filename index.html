@@ -1038,25 +1038,28 @@ Let’s create something amazing together! 💡✨</p>
     <!-- Demo Color changer Script -->
     <script src="preview/lmpixels-demo-panel.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll('.fun-value').forEach(el => {
-                let target = parseFloat(el.textContent);
-                if (isNaN(target)) return;
-                let isInt = Number.isInteger(target);
-                let count = 0;
-                let step = target / 100;
-                let interval = setInterval(() => {
-                    count += step;
-                    if (count >= target) {
-                        el.textContent = isInt ? target : target.toFixed(1);
-                        clearInterval(interval);
-                    } else {
-                      el.textContent = isInt ? Math.floor(count) : count.toFixed(1);
+      function animateCounters() {
+          document.querySelectorAll('.fun-value').forEach(el => {
+              let final = parseFloat(el.textContent.replace('+', ''));
+              if (isNaN(final)) return;
+              
+              let current = 0;
+              let isInt = Number.isInteger(final);
+              let speed = final / 60;
+              const update = () => {
+                  current += speed;
+                  if (current >= final) {
+                      el.textContent = isInt ? final : final.toFixed(1);
+                  } else {
+                      el.textContent = isInt ? Math.floor(current) : current.toFixed(1);
+                      requestAnimationFrame(update);
                     }
-                }, 15);
-            });
-        });
-    </script>
+                  };
+                  update();
+                });
+              }
+        window.addEventListener('load', animateCounters);
+      </script>
     <!-- /Demo Color changer Script -->
   </body>
 
