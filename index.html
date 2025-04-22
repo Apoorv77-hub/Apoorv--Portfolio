@@ -301,7 +301,7 @@ Let’s create something amazing together! 💡✨</p>
                   <div class="fun-fact-block gray-bg"> 
                     <i class="pe-7s-icon pe-7s-smile"></i>
                     <h4>Happy Clients</h4>
-                    <span class="fun-value"><b>39</b></span>
+                    <span class="fun-value" data-target="39"><b>0</b></span>
                   </div>
                 </div>
 
@@ -1037,6 +1037,26 @@ Let’s create something amazing together! 💡✨</p>
 
     <!-- Demo Color changer Script -->
     <script src="preview/lmpixels-demo-panel.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll('.fun-value').forEach(el => {
+                let target = parseFloat(el.textContent);
+                if (isNaN(target)) return;
+                let isInt = Number.isInteger(target);
+                let count = 0;
+                let step = target / 100;
+                let interval = setInterval(() => {
+                    count += step;
+                    if (count >= target) {
+                        el.textContent = isInt ? target : target.toFixed(1);
+                        clearInterval(interval);
+                    } else {
+                      el.textContent = isInt ? Math.floor(count) : count.toFixed(1);
+                    }
+                }, 15);
+            });
+        });
+    </script>
     <!-- /Demo Color changer Script -->
   </body>
 
